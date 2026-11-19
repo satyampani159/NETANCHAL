@@ -1,0 +1,4 @@
+{$DOMAIN} {
+	# WebSocket upgrades are proxied automatically
+	reverse_proxy server:3000
+}

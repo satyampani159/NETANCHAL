@@ -1,0 +1,25 @@
+{
+  "name": "netanchal",
+  "private": true,
+  "workspaces": [
+    "shared",
+    "client"
+  ],
+  "scripts": {
+    "dev": "npm run dev -w client",
+    "dev:server": "npm --prefix server run dev",
+    "build": "npm run build -w client",
+    "typecheck": "npm run typecheck -w shared && npm run typecheck -w client",
+    "balance": "npx tsx scripts/balance.ts",
+    "duel": "npx tsx scripts/duel.ts",
+    "rules": "npx tsx scripts/rules.ts",
+    "build:sim": "npm --prefix server run build:sim",
+    "e2e:socket": "node scripts/socket-e2e.mjs",
+    "margin": "tsx scripts/margin.ts",
+    "progression": "npx tsx scripts/progression.ts"
+  },
+  "devDependencies": {
+    "tsx": "4.19.2",
+    "typescript": "5.6.3"
+  }
+}

@@ -1,0 +1,28 @@
+# Runs the game server plus Caddy, which gets a free HTTPS certificate and proxies wss:// to the server.
+# Usage (on the VM, from this folder):
+#   DOMAIN=yourname.duckdns.org ALLOWED_ORIGINS=https://your-site.vercel.app docker compose up -d --build
+services:
+  server:
+    build:
+      context: ../../server
+    restart: unless-stopped
+    environment:
+      ALLOWED_ORIGINS: ${ALLOWED_ORIGINS:-}
+      TRUST_PROXY: "1"
+    expose:
+      - "3000"
+  caddy:
+    image: caddy:2
+    restart: unless-stopped
+    depends_on:
+      - server
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      DOMAIN: ${DOMAIN:?set DOMAIN, e.g. yourname.duckdns.org}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+volumes:
+  caddy_data:

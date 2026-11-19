@@ -1,0 +1,14 @@
+{
+  "name": "Netanchal",
+  "short_name": "Netanchal",
+  "description": "4v4. Best of 3. Whoever holds the HQ forms the government.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "fullscreen",
+  "orientation": "landscape",
+  "background_color": "#1F1A17",
+  "theme_color": "#F28C28",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

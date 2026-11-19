@@ -1,0 +1,24 @@
+{
+  "name": "netanchal-server",
+  "version": "1.0.0",
+  "description": "Authoritative real-time multiplayer server for Netanchal (Express + Socket.io)",
+  "main": "server.js",
+  "private": true,
+  "license": "UNLICENSED",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "build:sim": "esbuild ../shared/src/index.ts --bundle --platform=node --format=cjs --target=node18 --legal-comments=none --outfile=sim.bundle.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "socket.io": "^4.8.1"
+  },
+  "devDependencies": {
+    "esbuild": "^0.24.2"
+  }
+}

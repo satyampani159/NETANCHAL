@@ -1,0 +1,50 @@
+{
+  "vikas_veer": {
+    "title": "The Inaugurator",
+    "bio": "Has cut the ribbon on every flyover in the district, some of them twice. Leads from the front, usually at a sprint.",
+    "tip": "Save the dash to finish a fleeing helper, not to start a fight.",
+    "quote": "Another flyover? Hand me the scissors!"
+  },
+  "chanakya_rao": {
+    "title": "The Strategist",
+    "bio": "Keeps three plans in his kurta pocket and a fourth in his head. Never wins a fight alone, never loses one he planned.",
+    "tip": "Stand behind Kila, buff before the clash, not during it.",
+    "quote": "I planned this seat in 2019."
+  },
+  "sadak_kumar": {
+    "title": "The Contractor",
+    "bio": "Every road he builds comes with a speed breaker. Some come with nothing else.",
+    "tip": "Drop the Speed Breaker on the vote bank and let them walk into it.",
+    "quote": "Road closed. Permanently. For your safety."
+  },
+  "kila_singh": {
+    "title": "The Fort",
+    "bio": "Retired from guarding a real fort; now guards the party office with the same lathi and none of the patience.",
+    "tip": "Stay on the gate. Fortify when the enemy commits, not when they poke.",
+    "quote": "Nobody enters the office. Not even the peon."
+  },
+  "toofan_rani": {
+    "title": "The Storm",
+    "bio": "Turned a small protest into a state-wide wave and a megaphone into a weapon. Arrives loud and leaves louder.",
+    "tip": "Whirlwind in the middle of their helpers, then walk out through the gap.",
+    "quote": "Storm warning! Clear the chowk!"
+  },
+  "bijli_babu": {
+    "title": "The Lineman",
+    "bio": "Former electricity board clerk who knows exactly where every switch in the city is. Uses that knowledge politically.",
+    "tip": "Hold Power Cut for when their attacker dives your HQ.",
+    "quote": "Free bijli for everyone! Except you."
+  },
+  "pandit_shabdkosh": {
+    "title": "The Dictionary",
+    "bio": "Has never used a short word where a long one would do. Debates opponents into exhaustion from across the chowk.",
+    "tip": "Keep your distance, heal when two allies are hurt, never when one is.",
+    "quote": "Your argument is floccinaucinihilipilification."
+  },
+  "dharna_dada": {
+    "title": "The Sit-in",
+    "bio": "Has sat in protest outside every office in the district. Once sat for so long they moved the office.",
+    "tip": "Sit on a capture zone: you count double and they have to go through you.",
+    "quote": "I'm not moving. Bring chai."
+  }
+}

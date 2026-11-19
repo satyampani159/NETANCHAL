@@ -1,0 +1,29 @@
+# Runs the game server plus Caddy (free HTTPS certificate, forwards wss:// to the server).
+# On the VM, from this folder:   cp .env.example .env   (edit it)   then   docker compose up -d --build
+services:
+  server:
+    build:
+      context: ../backend
+    restart: unless-stopped
+    environment:
+      ALLOWED_ORIGINS: ${ALLOWED_ORIGINS:?set ALLOWED_ORIGINS in .env, e.g. https://netanchal.pages.dev}
+      TRUST_PROXY: "1"
+      MAX_ROOMS: ${MAX_ROOMS:-20}
+    expose:
+      - "3000"
+    mem_limit: 450m
+  caddy:
+    image: caddy:2
+    restart: unless-stopped
+    depends_on:
+      - server
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      DOMAIN: ${DOMAIN:?set DOMAIN in .env, e.g. yourname.duckdns.org}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+volumes:
+  caddy_data:

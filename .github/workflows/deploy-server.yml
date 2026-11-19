@@ -1,0 +1,64 @@
+name: Update the game server
+
+# Copies the server to your VM and restarts it. It does nothing until you add three repository secrets:
+#   VM_HOST     the VM's public IP or DuckDNS name
+#   VM_USER     the VM login name (usually ubuntu)
+#   VM_SSH_KEY  the PRIVATE key of a key pair made just for this (see DEPLOY.md)
+# You can also press "Run workflow" to update by hand.
+on:
+  push:
+    branches: [main]
+    paths:
+      - server/**
+      - shared/**
+      - deploy/zip/**
+      - .github/workflows/deploy-server.yml
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-server
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      VM_HOST: ${{ secrets.VM_HOST }}
+      VM_USER: ${{ secrets.VM_USER }}
+      VM_SSH_KEY: ${{ secrets.VM_SSH_KEY }}
+    steps:
+      - name: Check the secrets are set
+        id: secrets
+        run: |
+          if [ -z "$VM_HOST" ] || [ -z "$VM_USER" ] || [ -z "$VM_SSH_KEY" ]; then
+            echo "Server auto-update is not set up (VM_HOST, VM_USER, VM_SSH_KEY). Skipping."
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          fi
+      - uses: actions/checkout@v4
+        if: steps.secrets.outputs.ready == 'true'
+      - name: Set up SSH
+        if: steps.secrets.outputs.ready == 'true'
+        run: |
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$VM_SSH_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H "$VM_HOST" >> ~/.ssh/known_hosts
+      - name: Copy the server and deploy files
+        if: steps.secrets.outputs.ready == 'true'
+        run: bash deploy/zip/push-to-vm.sh
+      - name: Restart and wait for /health
+        if: steps.secrets.outputs.ready == 'true'
+        run: |
+          ssh -i ~/.ssh/deploy_key "$VM_USER@$VM_HOST" 'cd ~/deploy && docker compose up -d --build'
+          for i in $(seq 1 30); do
+            if ssh -i ~/.ssh/deploy_key "$VM_USER@$VM_HOST" 'cd ~/deploy && docker compose exec -T server wget -qO- http://localhost:3000/health' | grep -q '"ok":true'; then
+              echo "Server is healthy."
+              exit 0
+            fi
+            sleep 4
+          done
+          echo "::error::The server did not become healthy. Check 'docker compose logs server' on the VM."
+          exit 1

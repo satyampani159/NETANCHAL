@@ -1,0 +1,45 @@
+name: Checks
+
+# Runs on every push and pull request. Cloudflare Pages publishes the website on its own;
+# this workflow tells you early if a change breaks the game rules, the server or the build.
+on:
+  push:
+  pull_request:
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm --prefix server ci
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Game rules
+        run: npm run rules
+      - name: Progression logic
+        run: npm run progression
+      - name: Character duels
+        run: npm run duel
+      - name: Server end-to-end test
+        run: npm run e2e:socket
+      - name: Server bundle is up to date
+        run: |
+          npm run build:sim
+          if ! git diff --quiet -- server/sim.bundle.js; then
+            echo "::error::server/sim.bundle.js is out of date. Run 'npm run build:sim' and commit the result."
+            git --no-pager diff --stat -- server/sim.bundle.js
+            exit 1
+          fi
+      - name: Build the website
+        run: npm run build -w client
+      - name: The built site has what Cloudflare needs
+        run: |
+          test -f client/dist/index.html
+          test -f client/dist/config.js
+          test -f client/dist/_headers
