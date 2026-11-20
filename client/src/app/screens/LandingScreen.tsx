@@ -58,7 +58,7 @@ function ServerStatus() {
   if (!HAS_SERVER_CONFIG)
     return <p className="max-w-xs text-center text-xs sm:text-sm font-semibold text-nb/75">Online play needs a game server, and this site has none connected yet. Vs bots works right now.</p>;
   const dot = state.kind === 'ok' ? '#1FA463' : state.kind === 'down' ? '#E5484D' : '#9a9a9a';
-  const text = state.kind === 'ok' ? `Server online · ${state.players} playing` : state.kind === 'down' ? 'Server asleep or unreachable. Free servers can take up to a minute to wake.' : 'Checking the server…';
+  const text = state.kind === 'ok' ? `Server online · ${state.players} playing` : state.kind === 'down' ? 'Slow server due to heavy traffic' : 'Checking the server…';
   return (
     <p className="flex items-center gap-2 max-w-xs text-xs sm:text-sm font-semibold text-nb/80" role="status">
       <span className="w-3 h-3 rounded-full border-2 border-nb shrink-0" style={{ background: dot }} aria-hidden="true" />
