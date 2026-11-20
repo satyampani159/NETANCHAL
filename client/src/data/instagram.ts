@@ -10,7 +10,11 @@ export const INSTAGRAM_URL = 'https://www.instagram.com/netanchal/';
  *   'https://www.instagram.com/reel/AbCdEfGhIjK/'
  * While this list is empty the gallery shows three cards that open the profile.
  */
-export const POSTS: string[] = [];
+export const POSTS: string[] = [
+  'https://www.instagram.com/reel/Df9ck1nhHOV/',
+  'https://www.instagram.com/reel/Df9ceyOOQDu/',
+  'https://www.instagram.com/p/Df7Lwqioxwu/',
+];
 
 /** the embeddable address of a post link, or null if it is not a post or reel link */
 export function embedUrl(post: string): string | null {
