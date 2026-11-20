@@ -1,9 +1,17 @@
 import { createRoot } from 'react-dom/client';
+import { initAnalytics } from './analytics';
 import { AppShell } from './app/AppShell';
 import { initSiteSound } from './game/siteSound';
 import './index.css';
 
 initSiteSound();
+
+// passive analytics (reads only; pushes to window.dataLayer for Tag Manager). Never allowed to stop the app.
+try {
+  initAnalytics();
+} catch {
+  /* ignore */
+}
 
 // No StrictMode: its double-mount would open two rooms and two Phaser games in dev.
 createRoot(document.getElementById('root')!).render(<AppShell />);

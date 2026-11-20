@@ -1,12 +1,13 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-TH748BDF"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-</script>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-TH748BDF');</script>
+    <!-- End Google Tag Manager -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="theme-color" content="#F28C28" />
@@ -14,7 +15,25 @@
     <meta property="og:title" content="Netanchal: a fictional election, fought on your phone" />
     <meta property="og:description" content="4v4 party brawler. Follow @netanchal on Instagram." />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://netanchal.online/" />
+    <link rel="canonical" href="https://netanchal.online/" />
     <link rel="me" href="https://www.instagram.com/netanchal/" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "VideoGame",
+        "name": "Netanchal",
+        "url": "https://netanchal.online/",
+        "description": "A 4v4 party brawler. Best of 3. Whoever holds the HQ forms the government.",
+        "genre": ["Action", "Brawler", "Party"],
+        "playMode": ["MultiPlayer", "SinglePlayer"],
+        "gamePlatform": "Web browser",
+        "operatingSystem": "Any",
+        "applicationCategory": "Game",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" },
+        "sameAs": ["https://www.instagram.com/netanchal/"]
+      }
+    </script>
     <title>Netanchal</title>
     <link rel="icon" type="image/svg+xml" href="./icon.svg" />
     <link rel="manifest" href="./manifest.webmanifest" />
@@ -23,6 +42,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Bangers&family=Hind:wght@400;500;600;700&family=Rozha+One&family=Teko:wght@500;600&display=swap" rel="stylesheet" />
   </head>
   <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TH748BDF" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
     <script src="./config.js"></script>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
